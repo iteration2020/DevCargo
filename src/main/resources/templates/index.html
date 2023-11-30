@@ -6,7 +6,7 @@
     <title>Мииииии</title>
     <!-- Подключение стилей Bootstrap для красивого оформления формы -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="your-custom-script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/styles.css"> <!-- Добавление вашего стилевого файла -->
 </head>
 <body>
 
@@ -19,7 +19,7 @@
             <label for="filterDate">Фильтр по КОТО-ДАТЕ!:</label>
             <input type="date" class="form-control" id="filterDate" name="date" required>
         </div>
-        <button type="submit" class="btn btn-primary">Фильтровать:3</button>
+        <button type="submit" class="btn btn-primary btn-pink">Фильтровать:3</button>
     </form>
 
     <!-- Таблица для отображения грузов -->
@@ -47,8 +47,8 @@
             <td th:text="${cargo.arrivalCity}"></td>
             <td th:text="${#dates.format(cargo.arrivalDate, 'yyyy-MM-dd')}"></td>
             <td>
-                <a th:href="@{/edit(id=${cargo.id})}" class="btn btn-warning btn-sm">Edit</a>
-                <a th:href="@{/delete(id=${cargo.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                <a th:href="@{/edit(id=${cargo.id})}" class="btn btn-warning btn-sm">Правка</a>
+                <a th:href="@{/delete(id=${cargo.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?')">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -59,7 +59,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="your-custom-script.js"></script>
 
 </body>
 </html>
