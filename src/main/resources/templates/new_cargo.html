@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Cargo</title>
+  <title>Добавление кото-груза</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container mt-5">
-  <h2>Add Cargo</h2>
+  <h2>Добавление кото-груза</h2>
 
   <!-- Форма для добавления груза -->
   <form th:action="@{/save}" th:object="${cargo}" method="post">
     <form th:action="@{/save}" th:object="${cargo}" method="post">
       <div class="form-group">
-        <label for="cargoName">Cargo Name:</label>
+        <label for="cargoName">Имя кото-груза:</label>
         <input type="text" class="form-control" id="cargoName" th:field="*{name}" required>
       </div>
       <div class="form-group">
-        <label for="cargoDescription">Description:</label>
+        <label for="cargoDescription">Описание кото-груза:</label>
         <textarea class="form-control" id="cargoDescription" th:field="*{content}"></textarea>
       </div>
       <div class="form-group">
-        <label for="departureCity">Departure City:</label>
+        <label for="departureCity">Кото-город отправки:</label>
         <input type="text" class="form-control" id="departureCity" th:field="*{departureCity}" required>
       </div>
       <div class="form-group">
-        <label for="departureDate">Departure Date:</label>
+        <label for="departureDate">Отправление кото-груза:</label>
         <input type="date" class="form-control" id="departureDate" th:field="*{departureDate}" required>
       </div>
       <div class="form-group">
-        <label for="arrivalCity">Arrival City:</label>
+        <label for="arrivalCity">Кото-город прибытия:</label>
         <input type="text" class="form-control" id="arrivalCity" th:field="*{arrivalCity}" required>
       </div>
       <div class="form-group">
-        <label for="arrivalDate">Arrival Date:</label>
+        <label for="arrivalDate">Прибытие кото-груза:</label>
         <input type="date" class="form-control" id="arrivalDate" th:field="*{arrivalDate}" required>
       </div>
       <button type="submit" class="btn btn-primary">Add Cargo</button>
