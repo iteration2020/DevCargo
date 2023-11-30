@@ -2,12 +2,17 @@ package com.example.devcargo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.Date;
 
 @Entity
 public class Cargo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String content;
     private String departureCity;
@@ -18,8 +23,6 @@ public class Cargo {
     protected Cargo() {
     }
 
-    @Id
-    @GeneratedValue
     public Long getId() {
         return this.id;
     }

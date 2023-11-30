@@ -3,30 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Система управления грузами</title>
+    <title>Мииииии</title>
     <!-- Подключение стилей Bootstrap для красивого оформления формы -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/your-custom-script.js"></script>
 </head>
 <body>
 
 <div class="container mt-5">
-    <h2>Система управления грузами</h2>
+    <h2>Грустные котята че-то пытаются решить с грузами</h2>
 
-    <!-- Форма для добавления груза -->
-    <form id="cargoForm">
+    <!-- Форма для фильтрации по дате -->
+    <form action="/filter" method="get">
         <div class="form-group">
-            <label for="cargoName">Название груза:</label>
-            <input type="text" class="form-control" id="cargoName" name="cargoName" required>
+            <label for="filterDate">Filter by Date:</label>
+            <input type="date" class="form-control" id="filterDate" name="date" required>
         </div>
-        <div class="form-group">
-            <label for="cargoDescription">Описание:</label>
-            <textarea class="form-control" id="cargoDescription" name="cargoDescription"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="deliveryDate">Дата поставки:</label>
-            <input type="date" class="form-control" id="deliveryDate" name="deliveryDate" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Добавить груз</button>
+        <button type="submit" class="btn btn-primary">Filter</button>
     </form>
 
     <!-- Таблица для отображения грузов -->
@@ -34,14 +27,30 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Дата поставки</th>
-            <th scope="col">Действия</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Departure City</th>
+            <th scope="col">Departure Date</th>
+            <th scope="col">Arrival City</th>
+            <th scope="col">Arrival Date</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
-        <tbody id="cargoTableBody">
-        <!-- Сюда будут добавляться строки с грузами из JavaScript -->
+        <tbody>
+        <!-- Вставка данных с использованием Thymeleaf -->
+        <tr th:each="cargo : ${listCargo}">
+            <td th:text="${cargo.id}"></td>
+            <td th:text="${cargo.name}"></td>
+            <td th:text="${cargo.content}"></td>
+            <td th:text="${cargo.departureCity}"></td>
+            <td th:text="${#dates.format(cargo.departureDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${cargo.arrivalCity}"></td>
+            <td th:text="${#dates.format(cargo.arrivalDate, 'yyyy-MM-dd')}"></td>
+            <td>
+                <a th:href="@{/edit(id=${cargo.id})}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{/delete(id=${cargo.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
