@@ -1,6 +1,7 @@
 version: '3.9'
 services:
-  mysql:
+  cargodb:
+    container_name: 'cargodb'
     image: 'mysql:latest'
     environment:
       - 'MYSQL_DATABASE=DevCargo'
@@ -10,10 +11,15 @@ services:
     ports:
       - '3306:3306'
   spring:
+    container_name: 'cargoapp'
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
+    expose:
+      - '8000'
     environment:
       - 'SPRING_PROFILES_ACTIVE=production'
+    depends_on:
+      - cargodb
