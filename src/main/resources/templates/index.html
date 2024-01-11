@@ -1,75 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Система работы со студентами</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мииииии</title>
+    <!-- Подключение стилей Bootstrap для красивого оформления формы -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css"> <!-- Добавление вашего стилевого файла -->
 </head>
 <body>
-<div class="bg-image"
-     style="background-image: url('https://palchevsky.ru/images/background.jpg'); height: 100vh; overflow: auto">
-    <blockquote class="blockquote text-center"><h1>Студенты факультета ИТиАБД</h1></blockquote>
-    <div class="row">
-        <div class="col-md-8 offset-md-4">
-            <h4>Поиск студента по любому критерию:</h4>
-            <form th:action="@{/}">
-                <input type="text" name="keyword" id="keyword" size="70" th:value="${keyword}" required/>
-                <input type="submit" class="btn btn-success btn-sm" value="Поиск"/>
-                <input type="button" class="btn btn-warning btn-sm" value="Очистить" id="btnClear"
-                       onclick="clearSearch()"/>
-            </form>
+
+<div class="container mt-5">
+    <h2>Грустные котята че-то пытаются решить с грузами</h2>
+
+    <!-- Форма для фильтрации по дате -->
+    <form action="/filter" method="get">
+        <div class="form-group">
+            <label for="filterDate">Фильтр по КОТО-ДАТЕ!:</label>
+            <input type="date" class="form-control" id="filterDate" name="date" required>
         </div>
-    </div>
-    <table id="1" class="table table-striped table-hover">
+        <button type="submit" class="btn btn-primary btn-pink">Фильтровать:3</button>
+    </form>
+
+    <!-- Таблица для отображения грузов -->
+    <table class="table mt-3">
         <thead>
         <tr>
-            <th scope="col">ID студента</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Фамилия</th>
-            <th scope="col">Номер студенческого</th>
-            <th scope="col">Средний балл</th>
-            <th scope="col">Действия</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Departure City</th>
+            <th scope="col">Departure Date</th>
+            <th scope="col">Arrival City</th>
+            <th scope="col">Arrival Date</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="student: ${listStudents}">
-            <th scope="row" class="text-white" th:text="${student.id}">ID студента отстутсвует</th>
-            <th scope="row" class="text-white" th:text="${student.first}">Имя студента отсутствует</th>
-            <th scope="row" class="text-white" th:text="${student.last}">Фамилия студента отсутствует</th>
-            <th scope="row" class="text-white" th:text="${student.num}">Номер студенческого отсутствует</th>
-            <th scope="row" class="text-white" th:text="${student.av}">Средний балл студента отсутствует</th>
+        <!-- Вставка данных с использованием Thymeleaf -->
+        <tr th:each="cargo : ${listCargo}">
+            <td th:text="${cargo.id}"></td>
+            <td th:text="${cargo.name}"></td>
+            <td th:text="${cargo.content}"></td>
+            <td th:text="${cargo.departureCity}"></td>
+            <td th:text="${#dates.format(cargo.departureDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${cargo.arrivalCity}"></td>
+            <td th:text="${#dates.format(cargo.arrivalDate, 'yyyy-MM-dd')}"></td>
             <td>
-                <a th:href="@{'/edit/'+${student.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
-                <a th:href="@{'/delete/'+${student.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
+                <a th:href="@{/edit(id=${cargo.id})}" class="btn btn-warning btn-sm">Правка</a>
+                <a th:href="@{/delete(id=${cargo.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Уверен?')">Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <p class="text-white">
-        <script type="text/javascript">
-            function getRowsColumn() {
-                let table = document.getElementById('1')
-                let tBody = table.querySelector('tbody')
-                const count = tBody.querySelectorAll('tr').length;
-                document.write('Количество студентов в таблице: ' + count)
-            }
-
-            getRowsColumn()
-        </script>
-    </p>
-    <blockquote class="blockquote text-center">
-        <a href="/new">
-            <button type="button" class="btn btn-primary" data-togge="button" aria-pressed="false" autocomplete="off">
-                Добавить студента
-            </button>
-        </a>
-    </blockquote>
 </div>
-<script type="text/javascript">
-    function clearSearch() {
-        window.location = "[[@{/}]]";
-    }
-</script>
+
+<!-- Подключение скриптов Bootstrap и вашего собственного JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
